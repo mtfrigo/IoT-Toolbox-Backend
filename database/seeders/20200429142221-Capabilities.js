@@ -26,6 +26,14 @@ module.exports = {
       {
         name: 'Sensing of distance',
         description: 'Enables distance measurement.',
+      },
+      {
+        name: 'Sensing of motion',
+        description: 'Enables detection of motion.',
+      },
+      {
+        name: 'Sensing of occupancy',
+        description: 'Enables detection of occupancy.',
       }
     ], {}),
 

@@ -23,6 +23,31 @@ module.exports = {
         type: 'Gateway',
         description: 'Gateway that allows BLE devices connect to the network.',
       },
+      {
+        name: 'WiFI router',
+        type: 'Gateway',
+        description: 'Gateway that allows WiFi devices connect to the network.',
+      },
+      {
+        name: 'IoT Platform',
+        type: 'Gateway',
+        description: 'Gateway that allows WiFi devices connect to the network.',
+      },
+      {
+        name: 'Occupancy sensor',
+        type: 'Sensor',
+        description: 'Sensor for detection of occupancy.',
+      },
+      {
+        name: 'LoRa sender',
+        type: 'Gateway',
+        description: 'LoRa sender',
+      },
+      {
+        name: 'LoRa receiver',
+        type: 'Gateway',
+        description: 'LoRa receiver',
+      },
     ], {}),
   
   down: async (queryInterface) => {
