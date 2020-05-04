@@ -2,26 +2,16 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('BBlocksDependencies', {
+    return queryInterface.createTable('BBIs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_bb: {
-        type: Sequelize.INTEGER,
+      name: {
+        type: Sequelize.STRING,
         allowNull: false,
-        references: {model: 'BuildingBlocks', key: 'id'},
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      id_dependent: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {model: 'BuildingBlocks', key: 'id'},
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +27,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('BBlocksDependencies');
+    return queryInterface.dropTable('BBIs');
   }
 };
