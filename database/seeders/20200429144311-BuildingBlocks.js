@@ -4,9 +4,9 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('BuildingBlocks', 
     [
       {
-        name: 'Flower Care Smart Plant Monitor',
+        name: 'Plant Sensor',
         type: 'Sensor',
-        description: 'Flower Care™ speaks for plants, and accurate deliver all needs of every greenery & flowers at home, such as if the current moisture, sunlight, fertilizer and temperature are suitable for them or not, enable you to take care your plants nice and easy.',
+        description: 'Sensor to measure soil conditions.',
       },
       {
         name: 'Loose Coupling',
@@ -47,6 +47,11 @@ module.exports = {
         name: 'LoRa receiver',
         type: 'Gateway',
         description: 'LoRa receiver',
+      },
+      {
+        name: 'Light Sensor',
+        type: 'Sensor',
+        description: 'Sensor that measures luminosity.',
       },
     ], {}),
   

@@ -8,6 +8,14 @@ class BBI extends Model {
             type: DataTypes.STRING,
             allowNull: false
           },
+          description: {
+            type: DataTypes.STRING,
+            allowNull: true
+          },
+          icon: {
+            type: DataTypes.STRING,
+            allowNull: true
+          },
           type: {
             type: DataTypes.STRING,
             allowNull: false
@@ -18,11 +26,12 @@ class BBI extends Model {
     }
 
     static associate(models) {
-      this.belongsToMany(models.Artifact, { foreignKey: "id_bbi", through: 'BBiArtifacts', as: 'BBiArtifacts'});
-      this.belongsToMany(models.Interface, { foreignKey: "id_bbi", through: 'BBiInterfaces', as: 'BBiInterfaces'});
+      this.belongsToMany(models.Artifact, { foreignKey: "id_bbi", through: 'BBiArtifacts'});
+      this.belongsToMany(models.Interface, { foreignKey: "id_bbi", through: 'BBiInterfaces'});
       this.belongsToMany(models.BBI, { foreignKey: "id_bbi", through: 'BBisDependents', as: 'Dependents'});
       this.belongsToMany(models.BBI, { foreignKey: "id_bbi", through: 'BBiDependencies', as: 'Dependencies'});
+      this.belongsToMany(models.BuildingBlock, { foreignKey: "id_bbi", through: 'BBImplementations', as: 'Implements'});
     }
-}
+} 
 
 module.exports = BBI;

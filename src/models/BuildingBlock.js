@@ -28,8 +28,9 @@ class BuildingBlock extends Model {
     static associate(models) {
       //this.belongsToMany(models.BuildingBlock, { foreignKey: "cap_id", through: 'B', as: 'mounts' });
       this.belongsToMany(models.Capability, { foreignKey: "id_bb", through: 'BBlocksCapabilities', as: 'BlockCapabilities'});
-      this.belongsToMany(models.BuildingBlock, { foreignKey: "id_bb_1", through: 'BBlocksDependencies', as: 'BlockDependencies'});
-      this.belongsToMany(models.BuildingBlock, { foreignKey: "id_bb_2", through: 'BBlocksDependencies', as: 'DependentBlocks'});
+      this.belongsToMany(models.BuildingBlock, { foreignKey: "id_bb", through: 'BBlocksDependencies', as: 'BlockDependencies'});
+      this.belongsToMany(models.BuildingBlock, { foreignKey: "id_dependent", through: 'BBlocksDependencies', as: 'DependentBlocks'});
+      this.belongsToMany(models.BBI, { foreignKey: "id_bb", through: 'BBImplementations', as: 'ImplementedBy'});
     }
 }
 

@@ -31,6 +31,7 @@ routes.post('/requirements', RequirementController.create);
 
 //BuildingBlock
 routes.get('/building-blocks', BuildingBlockController.index);
+routes.get('/building-blocks/:id', BuildingBlockController.get);
 
 
 module.exports = routes;

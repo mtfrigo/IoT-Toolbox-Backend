@@ -9,7 +9,7 @@ class Interface extends Model {
             allowNull: false,
           },
           reference: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
           }
         }, {

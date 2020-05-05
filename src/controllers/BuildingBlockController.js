@@ -26,11 +26,59 @@ module.exports = {
             through: {
               attributes: []
             }
+          },
+          { 
+            association: 'ImplementedBy',
+            attributes: ['id','name'],
+            through: {
+              attributes: []
+            }
           }
         ],
     });
 
     return res.json(bbs)
   },
+
+  async get(req, res) {
+    const { id } = req.params;
+
+    const bb = await BuildingBlock.findOne({
+      where: {id},
+      include: [
+          { 
+            association: 'BlockCapabilities',
+            attributes: ['id','name', 'description'],
+            through: {
+              attributes: []
+            }
+          },
+          { 
+            association: 'BlockDependencies',
+            attributes: ['id','name'],
+            through: {
+              attributes: []
+            }
+          },
+          { 
+            association: 'DependentBlocks',
+            attributes: ['id','name'],
+            through: {
+              attributes: []
+            }
+          },
+          { 
+            association: 'ImplementedBy',
+            attributes: ['id','name'],
+            through: {
+              attributes: []
+            }
+          }
+        ],
+    });
+
+    return res.json(bb)
+
+  }
 
 }
