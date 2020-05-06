@@ -29,7 +29,7 @@ module.exports = {
           },
           { 
             association: 'ImplementedBy',
-            attributes: ['id','name'],
+            attributes: ['id','name', 'description'],
             through: {
               attributes: []
             }
@@ -69,7 +69,7 @@ module.exports = {
           },
           { 
             association: 'ImplementedBy',
-            attributes: ['id','name'],
+            attributes: ['id','name', 'description'],
             through: {
               attributes: []
             }
