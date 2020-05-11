@@ -19,6 +19,7 @@ const sequelize = new Sequelize('iot_db', 'postgres', 'docker', {
 const UserController = require('./controllers/UserController');
 const RequirementController = require('./controllers/RequirementController');
 const BuildingBlockController = require('./controllers/BuildingBlockController');
+const MatchingController = require('./controllers/MatchingController');
 
 
 // User
@@ -32,6 +33,9 @@ routes.post('/requirements', RequirementController.create);
 //BuildingBlock
 routes.get('/building-blocks', BuildingBlockController.index);
 routes.get('/building-blocks/:id', BuildingBlockController.get);
+
+//Matching
+routes.get('/matching', MatchingController.get);
 
 
 module.exports = routes;

@@ -18,7 +18,8 @@ class Capability extends Model {
     }
 
     static associate(models) {
-      this.belongsToMany(models.BuildingBlock, { foreignKey: "id_capability", through: 'BBlocksCapabilities'});
+      this.belongsToMany(models.Requirement, { foreignKey: "id_capability", through: 'RequirementsMatching', as: 'Solves'});
+      this.belongsToMany(models.BuildingBlock, { foreignKey: "id_capability", through: 'BBlocksCapabilities', as: 'CapableBlocks'});
     }
 }
 

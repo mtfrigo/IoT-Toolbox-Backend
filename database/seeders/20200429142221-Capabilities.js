@@ -16,7 +16,7 @@ module.exports = {
         description: 'Enables limunosity measurement.',
       },
       {
-        name: 'Sensing of humidty',
+        name: 'Sensing of humidity',
         description: 'Enables humidity measurement.',
       },
       {
