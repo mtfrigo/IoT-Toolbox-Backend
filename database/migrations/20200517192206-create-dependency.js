@@ -2,23 +2,15 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('BBiDependencies', {
+    return queryInterface.createTable('Dependencies', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_bbi: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {model: 'BBIs', key: 'id'},
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      dependency: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      name: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +26,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('BBiArtifacts');
+    return queryInterface.dropTable('Dependencies');
   }
 };

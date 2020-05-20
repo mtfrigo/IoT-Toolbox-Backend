@@ -10,6 +10,7 @@ const BuildingBlock = require('../src/models/BuildingBlock');
 const BBi = require('../src/models/BBI');
 const Artifact = require('../src/models/Artifact');
 const Interface = require('../src/models/Interface');
+const Dependency = require('../src/models/Dependency');
 
 const connection = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
   host: dbConfig.host,
@@ -24,6 +25,7 @@ BuildingBlock.init(connection);
 Capability.init(connection);
 Interface.init(connection);
 Artifact.init(connection);
+Dependency.init(connection);
 BBi.init(connection);
 
 //Init asssociations of models
@@ -31,6 +33,9 @@ User.associate(connection.models);
 Requirement.associate(connection.models);
 BuildingBlock.associate(connection.models);
 Capability.associate(connection.models);
+Interface.associate(connection.models);
+Artifact.associate(connection.models);
+Dependency.associate(connection.models);
 BBi.associate(connection.models);
 
 module.exports = connection;

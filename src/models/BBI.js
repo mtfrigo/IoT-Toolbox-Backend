@@ -12,14 +12,6 @@ class BBI extends Model {
             type: DataTypes.STRING,
             allowNull: true
           },
-          icon: {
-            type: DataTypes.STRING,
-            allowNull: true
-          },
-          type: {
-            type: DataTypes.STRING,
-            allowNull: false
-          },
         }, {
             sequelize
         })
@@ -28,9 +20,12 @@ class BBI extends Model {
     static associate(models) {
       this.belongsToMany(models.Artifact, { foreignKey: "id_bbi", through: 'BBiArtifacts'});
       this.belongsToMany(models.Interface, { foreignKey: "id_bbi", through: 'BBiInterfaces'});
-      this.belongsToMany(models.BBI, { foreignKey: "id_bbi", through: 'BBisDependents', as: 'Dependents'});
-      this.belongsToMany(models.BBI, { foreignKey: "id_bbi", through: 'BBiDependencies', as: 'Dependencies'});
+
+      this.belongsToMany(models.BBI, { foreignKey: "id_bbi", through: 'BBisDependents', as: 'BBIDependents'});
+      this.belongsToMany(models.BBI, { foreignKey: "id_bbi_dependent", through: 'BBisDependents', as: 'BBIDependencies'});
       this.belongsToMany(models.BuildingBlock, { foreignKey: "id_bbi", through: 'BBImplementations', as: 'Implements'});
+      this.belongsToMany(models.Dependency, { foreignKey: "id_dependency", through: 'BBiDependencies', as: 'Dependencies'});
+
     }
 } 
 

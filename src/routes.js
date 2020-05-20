@@ -21,6 +21,7 @@ const RequirementController = require('./controllers/RequirementController');
 const BuildingBlockController = require('./controllers/BuildingBlockController');
 const MatchingController = require('./controllers/MatchingController');
 const CapabilityController = require('./controllers/CapabilityController');
+const BBIController = require('./controllers/BBIController');
 
 
 // User
@@ -45,6 +46,16 @@ routes.put('/building-blocks/:id', BuildingBlockController.update);
 routes.post('/bb-capability/:id', BuildingBlockController.addCap);
 routes.post('/bb-dependency/:id', BuildingBlockController.addDep);
 routes.delete('/building-blocks/:id', BuildingBlockController.delete);
+
+//BBI
+routes.get('/bbis', BBIController.index);
+routes.get('/bbis-dependencies', BBIController.dependencies);
+routes.post('/bbis', BBIController.create);
+routes.put('/bbis/:id', BBIController.update);
+routes.post('/bbi-dependents/:id', BBIController.addDependents);
+routes.post('/bbi-dependencies/:id', BBIController.addDependencies);
+routes.post('/bbi-implements/:id', BBIController.addImplemented);
+routes.delete('/bbi/:id', BBIController.delete);
 
 //Matching
 routes.get('/matching', MatchingController.get);

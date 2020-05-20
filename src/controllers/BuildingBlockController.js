@@ -118,7 +118,7 @@ module.exports = {
     const bb = await BuildingBlock.findByPk(id);
 
     if(!bb) {
-        return res.status(400).json({error: 'BB not found'});
+      return res.status(400).json({error: 'BB not found'});
     }
 
     await bb.update({ name, type, description });
