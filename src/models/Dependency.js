@@ -13,7 +13,7 @@ class Dependency extends Model {
     }
 
     static associate(models) {
-      this.belongsToMany(models.BBI, { foreignKey: "id_bbi", through: 'BBiDependencies'});
+      this.belongsToMany(models.BBI, { foreignKey: "id_dependency", through: 'BBiDependencies'});
     }
 }
 

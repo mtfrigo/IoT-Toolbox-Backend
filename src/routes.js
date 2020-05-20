@@ -55,7 +55,7 @@ routes.put('/bbis/:id', BBIController.update);
 routes.post('/bbi-dependents/:id', BBIController.addDependents);
 routes.post('/bbi-dependencies/:id', BBIController.addDependencies);
 routes.post('/bbi-implements/:id', BBIController.addImplemented);
-routes.delete('/bbi/:id', BBIController.delete);
+routes.delete('/bbis/:id', BBIController.delete);
 
 //Matching
 routes.get('/matching', MatchingController.get);

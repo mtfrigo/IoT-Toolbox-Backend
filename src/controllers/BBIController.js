@@ -43,7 +43,7 @@ module.exports = {
             }
           },
           { 
-            association: 'Dependencies',
+            association: 'BlockDependencies',
             attributes: ['id','name'],
             through: {
               attributes: []
@@ -120,7 +120,7 @@ module.exports = {
 
     const bbi = await BBI.findByPk(id);
 
-    await bbi.setDependencies(deps);
+    await bbi.setBlockDependencies(deps);
 
     return res.json(bbi)
   },
