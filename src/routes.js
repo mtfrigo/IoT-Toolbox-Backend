@@ -31,6 +31,7 @@ routes.post('/user', UserController.create);
 // Capabilty
 routes.get('/capability', CapabilityController.index);
 routes.post('/capability', CapabilityController.create);
+routes.post('/capability/:id', CapabilityController.addReq);
 
 //Requirement
 routes.get('/requirements', RequirementController.index);
@@ -58,7 +59,7 @@ routes.post('/bbi-implements/:id', BBIController.addImplemented);
 routes.delete('/bbis/:id', BBIController.delete);
 
 //Matching
-routes.get('/matching', MatchingController.get);
+routes.post('/matching', MatchingController.get);
 
 
 module.exports = routes;

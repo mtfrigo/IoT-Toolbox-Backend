@@ -9,7 +9,6 @@ module.exports = {
     async get(req, res) {
       const { requirements } = req.body;
 
-
       const reqs = await Requirement.findAll({
         where: {
           id: {
