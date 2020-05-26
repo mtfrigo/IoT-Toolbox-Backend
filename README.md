@@ -48,3 +48,9 @@ TODO
 
 ### 1.4 Installation using Docker
 TODO
+
+## REST API 
+
+A REST API is implemented using nodejs. 
+
+For the API complete reference click [here](https://github.com/mtfrigo/IoT-Toolbox-Frontend)
