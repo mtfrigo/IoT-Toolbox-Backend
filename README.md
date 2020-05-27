@@ -2,7 +2,7 @@
 
 This project contains the **IoT Toolbox** Prototype, an IoT platform developed for easing the setup of IoT environments and their applications.
 
-This specific project deals with the Back-End side of the project. The Front-End documentation is provided as the GitHub project [IoT Toolbox Frontend](https://github.com/mtfrigo/IoT-Toolbox-Frontend).
+This specific project deals with the Back-End side of the project. The Front-End documentation is provided as the GitHub project [IoT Toolbox Front-End](https://github.com/mtfrigo/IoT-Toolbox-Frontend).
 
 # Presentation
 
@@ -20,7 +20,7 @@ The following software components are used in order to set up the toolbox:
 * Back-End: [NodeJS](https://nodejs.org/en/), [Docker](https://docs.docker.com/get-docker/) and NPM.
 * Front-End: ReactJS.
 
-### 1.1 Installation on Linux
+### 1.1 Installation (on Linux)
 
 * First run:
 
@@ -44,15 +44,6 @@ Go to the root folder after cloning this repository and use the command: `npm in
 After all libraries been installed and the docker container created you can start the node server by using the command: `npm start`. The default server port is 3032. 
 
 To setup the front-end go to installion section on the [IoT Toolbox Frontend](https://github.com/mtfrigo/IoT-Toolbox-Frontend) project.
-
-### 1.2 Installation on Windows
-TODO
-
-### 1.3 Installation on Mac Os
-TODO
-
-### 1.4 Installation using Docker
-TODO
 
 ## REST API TODO
 
