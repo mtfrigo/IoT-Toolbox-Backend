@@ -48,9 +48,9 @@ To setup the front-end go to installation section on the [IoT Toolbox Front-End]
 
 A REST API is implemented using nodejs. 
 
-For the API complete reference click [here](https://github.com/mtfrigo/IoT-Toolbox-Frontend)
+For the API complete reference click [here](https://github.com/mtfrigo/IoT-Toolbox-Backend/wiki/API-Reference)
 
 
 ## Running instance TODO
 
-A running instance of the prototype can be accessed [here](https://github.com/mtfrigo/IoT-Toolbox-Frontend)
+A running instance of the prototype can be accessed [here](https://github.com/mtfrigo/IoT-Toolbox-Backend) [OFFLINE]
