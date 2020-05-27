@@ -22,7 +22,7 @@ The following software components are used in order to set up the toolbox:
 
 ### 1.1 Installation (on Linux)
 
-* First run:
+### First run:
 
 Create directory for the database volume
 `sudo mkdir -p $HOME/docker/volumes/postgres`
@@ -38,12 +38,11 @@ Run the seeds: `npx sequelize db:seed:all`
 
 Go to the root folder after cloning this repository and use the command: `npm install`.
 
-* Running the application:
-
+### Running the application:
 
 After all libraries been installed and the docker container created you can start the node server by using the command: `npm start`. The default server port is 3032. 
 
-To setup the front-end go to installion section on the [IoT Toolbox Frontend](https://github.com/mtfrigo/IoT-Toolbox-Frontend) project.
+To setup the front-end go to installation section on the [IoT Toolbox Front-End](https://github.com/mtfrigo/IoT-Toolbox-Frontend) project.
 
 ## REST API TODO
 
