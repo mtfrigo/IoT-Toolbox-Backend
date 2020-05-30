@@ -1,7 +1,13 @@
 const express = require('express');
-const routes = express.Router();
+
+const publicRoutes = express.Router();
+const authRoutes = express.Router();
 
 const Sequelize = require('sequelize');
+
+const authMiddleware = require('./middlewares/auth');
+
+authRoutes.use(authMiddleware);
 
 /*
 const sequelize = new Sequelize({
@@ -15,7 +21,6 @@ const sequelize = new Sequelize('iot_db', 'postgres', 'docker', {
   dialect: 'postgres'
 });
 
-
 const UserController = require('./controllers/UserController');
 const RequirementController = require('./controllers/RequirementController');
 const BuildingBlockController = require('./controllers/BuildingBlockController');
@@ -23,43 +28,46 @@ const MatchingController = require('./controllers/MatchingController');
 const CapabilityController = require('./controllers/CapabilityController');
 const BBIController = require('./controllers/BBIController');
 
-
 // User
-routes.get('/user', UserController.index);
-routes.post('/user', UserController.create);
+publicRoutes.get('/user', UserController.index);
+publicRoutes.post('/user', UserController.create);
+publicRoutes.post('/user/login', UserController.login);
 
 // Capabilty
-routes.get('/capability', CapabilityController.index);
-routes.post('/capability', CapabilityController.create);
-routes.post('/capability/:id', CapabilityController.addReq);
+authRoutes.get('/capability', CapabilityController.index);
+authRoutes.post('/capability', CapabilityController.create);
+authRoutes.post('/capability/:id', CapabilityController.addReq);
 
 //Requirement
-routes.get('/requirements', RequirementController.index);
-routes.post('/requirements', RequirementController.create);
-routes.put('/requirements/:id', RequirementController.update);
-routes.delete('/requirements/:id', RequirementController.delete);
+authRoutes.get('/requirements', RequirementController.index);
+authRoutes.post('/requirements', RequirementController.create);
+authRoutes.put('/requirements/:id', RequirementController.update);
+authRoutes.delete('/requirements/:id', RequirementController.delete);
 
 //BuildingBlock
-routes.get('/building-blocks', BuildingBlockController.index);
-routes.get('/building-blocks/:id', BuildingBlockController.get);
-routes.post('/building-blocks', BuildingBlockController.create);
-routes.put('/building-blocks/:id', BuildingBlockController.update);
-routes.post('/bb-capability/:id', BuildingBlockController.addCap);
-routes.post('/bb-dependency/:id', BuildingBlockController.addDep);
-routes.delete('/building-blocks/:id', BuildingBlockController.delete);
+authRoutes.get('/building-blocks', BuildingBlockController.index);
+authRoutes.get('/building-blocks/:id', BuildingBlockController.get);
+authRoutes.post('/building-blocks', BuildingBlockController.create);
+authRoutes.put('/building-blocks/:id', BuildingBlockController.update);
+authRoutes.post('/building-blocks/capability/:id', BuildingBlockController.addCap);
+authRoutes.post('/building-blocks/dependency/:id', BuildingBlockController.addDep);
+authRoutes.delete('/building-blocks/:id', BuildingBlockController.delete);
 
 //BBI
-routes.get('/bbis', BBIController.index);
-routes.get('/bbis-dependencies', BBIController.dependencies);
-routes.post('/bbis', BBIController.create);
-routes.put('/bbis/:id', BBIController.update);
-routes.post('/bbi-dependents/:id', BBIController.addDependents);
-routes.post('/bbi-dependencies/:id', BBIController.addDependencies);
-routes.post('/bbi-implements/:id', BBIController.addImplemented);
-routes.delete('/bbis/:id', BBIController.delete);
+authRoutes.get('/bbis', BBIController.index);
+authRoutes.get('/bbis-dependencies', BBIController.dependencies);
+authRoutes.post('/bbis', BBIController.create);
+authRoutes.put('/bbis/:id', BBIController.update);
+authRoutes.post('/bbi/dependents/:id', BBIController.addDependents);
+authRoutes.post('/bbi/dependencies/:id', BBIController.addDependencies);
+authRoutes.post('/bbi/implements/:id', BBIController.addImplemented);
+authRoutes.delete('/bbis/:id', BBIController.delete);
 
 //Matching
-routes.post('/matching', MatchingController.get);
+authRoutes.post('/matching', MatchingController.get);
 
 
-module.exports = routes;
+module.exports = {
+  authRoutes,
+  publicRoutes
+};

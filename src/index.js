@@ -1,7 +1,7 @@
 //index.js
 const express = require('express');
 const cors = require('cors');
-const routes = require('./routes');
+const {publicRoutes, authRoutes} = require('./routes');
 
 require('../database')
 
@@ -9,6 +9,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(routes);
+app.use(publicRoutes);
+app.use(authRoutes);
 
 app.listen(3332);

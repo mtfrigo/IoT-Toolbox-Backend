@@ -91,22 +91,22 @@ module.exports = {
 
   async addCap(req, res) {
     const { id } = req.params;
-    const { caps } = req.body;
+    const { capabilities } = req.body;
 
     const bb = await BuildingBlock.findByPk(id);
 
-    await bb.setBlockCapabilities(caps);
+    await bb.setBlockCapabilities(capabilities);
 
     return res.json(bb)
   },
 
   async addDep(req, res) {
     const { id } = req.params;
-    const { deps } = req.body;
+    const { dependencies } = req.body;
 
     const bb = await BuildingBlock.findByPk(id);
 
-    await bb.setBlockDependencies(deps);
+    await bb.setBlockDependencies(dependencies);
 
     return res.json(bb)
   },
