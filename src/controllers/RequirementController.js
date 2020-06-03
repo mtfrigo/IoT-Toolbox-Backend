@@ -8,6 +8,14 @@ module.exports = {
     return res.json(requirements)
   },
 
+
+  async get(req, res) {
+    const { id } = req.params;
+    const requirement = await Requirement.findByPk(id);
+
+    return res.json(requirement)
+  },
+
   async create(req, res) {
     const { reference, description } = req.body;
 

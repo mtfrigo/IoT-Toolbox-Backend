@@ -40,6 +40,7 @@ authRoutes.post('/capability/:id', CapabilityController.addReq);
 
 //Requirement
 authRoutes.get('/requirements', RequirementController.index);
+authRoutes.get('/requirements/:id', RequirementController.get);
 authRoutes.post('/requirements', RequirementController.create);
 authRoutes.put('/requirements/:id', RequirementController.update);
 authRoutes.delete('/requirements/:id', RequirementController.delete);
