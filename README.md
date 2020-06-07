@@ -44,13 +44,13 @@ After all libraries been installed and the docker container created you can star
 
 To setup the front-end go to installation section on the [IoT Toolbox Front-End](https://github.com/mtfrigo/IoT-Toolbox-Frontend) project.
 
-## REST API TODO
+## REST API
 
 A REST API is implemented using nodejs. 
 
-For the API complete reference click [here](https://github.com/mtfrigo/IoT-Toolbox-Frontend)
+For the API complete reference click [here](https://github.com/mtfrigo/IoT-Toolbox-Backend/wiki/API-Reference)
 
 
-## Running instance TODO
+## Running instance
 
-A running instance of the prototype can be accessed [here](https://github.com/mtfrigo/IoT-Toolbox-Frontend)
+A running instance of the prototype can be accessed [here](https://github.com/mtfrigo/IoT-Toolbox-Backend) [OFFLINE]
