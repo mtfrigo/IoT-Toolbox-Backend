@@ -82,11 +82,47 @@ module.exports = {
   },
 
   async create(req, res) {
-    const { name, type, description } = req.body;
+    const { name, type, description, caps, deps } = req.body;
 
     const bb = await BuildingBlock.create({ name, type, description });
+    await bb.setBlockCapabilities(caps);
+    await bb.setBlockDependencies(deps);
 
-    return res.json(bb)
+    const newBB = await BuildingBlock.findOne({
+      where: {id: bb.id},
+      include: [
+          { 
+            association: 'BlockCapabilities',
+            attributes: ['id','name', 'description'],
+            through: {
+              attributes: []
+            }
+          },
+          { 
+            association: 'BlockDependencies',
+            attributes: ['id','name'],
+            through: {
+              attributes: []
+            }
+          },
+          { 
+            association: 'DependentBlocks',
+            attributes: ['id','name'],
+            through: {
+              attributes: []
+            }
+          },
+          { 
+            association: 'ImplementedBy',
+            attributes: ['id','name', 'description'],
+            through: {
+              attributes: []
+            }
+          }
+        ],
+    });
+
+    return res.json(newBB)
   },
 
   async addCap(req, res) {
@@ -113,7 +149,7 @@ module.exports = {
 
   async update(req, res) {
     const { id } = req.params;
-    const { name, type, description } = req.body;
+    const { name, type, description, caps, deps } = req.body;
 
     const bb = await BuildingBlock.findByPk(id);
 
@@ -122,8 +158,44 @@ module.exports = {
     }
 
     await bb.update({ name, type, description });
+    await bb.setBlockCapabilities(caps);
+    await bb.setBlockDependencies(deps);
 
-    return res.json(bb);
+    const newBB = await BuildingBlock.findOne({
+      where: {id: bb.id},
+      include: [
+          { 
+            association: 'BlockCapabilities',
+            attributes: ['id','name', 'description'],
+            through: {
+              attributes: []
+            }
+          },
+          { 
+            association: 'BlockDependencies',
+            attributes: ['id','name'],
+            through: {
+              attributes: []
+            }
+          },
+          { 
+            association: 'DependentBlocks',
+            attributes: ['id','name'],
+            through: {
+              attributes: []
+            }
+          },
+          { 
+            association: 'ImplementedBy',
+            attributes: ['id','name', 'description'],
+            through: {
+              attributes: []
+            }
+          }
+        ],
+    });
+
+    return res.json(newBB);
   },
 
   async delete(req, res) {

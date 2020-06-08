@@ -1,4 +1,8 @@
+
 const express = require('express');
+
+const multer = require("multer");
+const multerConfig = require("./config/multer");
 
 const publicRoutes = express.Router();
 const authRoutes = express.Router();
@@ -9,12 +13,6 @@ const authMiddleware = require('./middlewares/auth');
 
 authRoutes.use(authMiddleware);
 
-/*
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: 'database.sqlite'
-});
-*/
 
 const sequelize = new Sequelize('iot_db', 'postgres', 'docker', {
   host: 'localhost',
@@ -27,6 +25,8 @@ const BuildingBlockController = require('./controllers/BuildingBlockController')
 const MatchingController = require('./controllers/MatchingController');
 const CapabilityController = require('./controllers/CapabilityController');
 const BBIController = require('./controllers/BBIController');
+
+const upload = multer(multerConfig);
 
 // User
 publicRoutes.get('/user', UserController.index);
@@ -57,7 +57,9 @@ authRoutes.delete('/building-blocks/:id', BuildingBlockController.delete);
 //BBI
 authRoutes.get('/bbis', BBIController.index);
 authRoutes.get('/bbis-dependencies', BBIController.dependencies);
-authRoutes.post('/bbis', BBIController.create);
+// authRoutes.post('/bbis', upload.array('artifacts') , BBIController.create);
+authRoutes.post('/bbis', upload.fields([{ name: 'artifacts' }, { name: 'interfaces' }]) , BBIController.create);
+
 authRoutes.put('/bbis/:id', BBIController.update);
 authRoutes.post('/bbi/dependents/:id', BBIController.addDependents);
 authRoutes.post('/bbi/dependencies/:id', BBIController.addDependencies);

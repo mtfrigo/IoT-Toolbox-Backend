@@ -4,16 +4,9 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Interfaces', 
     [
       {
-        name: 'XDK Light Sensor MQTT',
-        reference: 'some url ou path',
-      },{
-        name: 'XDK Light Sensor HTTP',
-        reference: 'some url ou path',
-      },
-      {
-        name: 'XDK Light Sensor BLE',
-        reference: 'some url ou path',
-      },
+        filename: 'oijaospdf-mqtt.py',
+        extension: 'py',
+      }
     ], {}),
   
   down: async (queryInterface) => {

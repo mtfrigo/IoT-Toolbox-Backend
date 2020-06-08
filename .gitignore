@@ -1,1 +1,9 @@
 node_modules
+
+uploads/*
+!uploads/.gitkeep
+!uploads/artifacts/.gitkeep
+!uploads/interfaces/.gitkeep
+
+
+*.sqlite

@@ -1,5 +1,7 @@
 const BuildingBlock = require("../models/BuildingBlock");
 const BBI = require("../models/BBI");
+const Artifact = require("../models/Artifact");
+const Interface = require("../models/Interface");
 const Dependency = require("../models/Dependency");
 
 module.exports = {
@@ -9,14 +11,14 @@ module.exports = {
       include: [
           { 
             association: 'Artifacts',
-            attributes: ['id','name'],
+            attributes: ['id','filename', 'extension'],
             through: {
               attributes: []
             }
           },
           { 
             association: 'Interfaces',
-            attributes: ['id','name'],
+            attributes: ['id','filename', 'extension'],
             through: {
               attributes: []
             }
@@ -52,6 +54,16 @@ module.exports = {
         ],
     });
 
+    bbis.map(bbi => {
+
+      bbi.Artifacts.map(function(artifact) {
+        artifact.generateUrl();
+      })
+  
+      bbi.Interfaces.map(function(interfaceFile) {
+        interfaceFile.generateUrl();
+      })
+    })
     return res.json(bbis)
   },
 
@@ -62,17 +74,96 @@ module.exports = {
   },
 
   async create(req, res) {
-    const { name, description } = req.body;
+    const { name, description, deps, bbs, bbiDeps } = req.body;
 
     const bbi = await BBI.create({ name, description });
 
-    return res.json(bbi)
+    await bbi.setBBIDependents(bbiDeps.split(',').map((item) => Number(item.trim())));
+    await bbi.setBlockDependencies(deps.split(',').map((item) => Number(item.trim())));
+    await bbi.setImplements(bbs.split(',').map((item) => Number(item.trim())));
+
+    let artifactIds = [];
+    for(let file of req.files.artifacts) {
+      const artifact = await Artifact.create({ filename: file.filename, extension: file.filename.split('.')[1] });
+      artifactIds.push(artifact.id);
+    }
+    await bbi.setArtifacts(artifactIds);
+
+    let interfacesIds = [];
+    for(let file of req.files.interfaces) {
+      const interface = await Interface.create({ filename: file.filename, extension: file.filename.split('.')[1] });
+      interfacesIds.push(interface.id);
+    }
+
+    console.log(interfacesIds)
+    await bbi.setInterfaces(interfacesIds);
+
+    const newBBI = await BBI.findOne({
+      where: {id: bbi.id},
+      include: [
+        { 
+          association: 'Artifacts',
+          attributes: ['id','filename', 'extension'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'Interfaces',
+          attributes: ['id','filename', 'extension'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'Implements',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'BBIDependents',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'BBIDependencies',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'BlockDependencies',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        }
+      ],
+    });
+
+
+    newBBI.Artifacts.map(function(artifact) {
+      artifact.generateUrl();
+    })
+
+    newBBI.Interfaces.map(function(interfaceFile) {
+      interfaceFile.generateUrl();
+    })
+
+   
+    return res.json(newBBI);
   },
 
   async update(req, res) {
     const { id } = req.params;
-    const { name, description } = req.body;
+    const { name, description, bbiDeps, deps, bbs, artifacts, interfaces } = req.body;
 
+    console.log(name, description, bbiDeps, deps, bbs, artifacts, interfaces)
     const bbi = await BBI.findByPk(id);
 
     if(!bbi) {
@@ -80,8 +171,69 @@ module.exports = {
     }
 
     await bbi.update({ name, description });
+    await bbi.setBBIDependents(bbiDeps);
+    await bbi.setBlockDependencies(deps);
+    await bbi.setImplements(bbs);
+    await bbi.setInterfaces(interfaces);
+    await bbi.setArtifacts(artifacts);
 
-    return res.json(bbi);
+    const newBBI = await BBI.findOne({
+      where: {id: bbi.id},
+      include: [
+        { 
+          association: 'Artifacts',
+          attributes: ['id','filename', 'extension'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'Interfaces',
+          attributes: ['id','filename', 'extension'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'Implements',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'BBIDependents',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'BBIDependencies',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'BlockDependencies',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        }
+      ],
+    });
+
+    newBBI.Artifacts.map(function(artifact) {
+      artifact.generateUrl();
+    })
+
+    newBBI.Interfaces.map(function(interfaceFile) {
+      interfaceFile.generateUrl();
+    })
+
+    return res.json(newBBI);
   },
 
   async delete(req, res) {

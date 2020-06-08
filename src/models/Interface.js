@@ -4,13 +4,16 @@ class Interface extends Model {
     static init(sequelize) {
         super.init({
           // attributes
-          name: {
+          filename: {
             type: DataTypes.STRING,
             allowNull: false,
           },
-          reference: {
+          extension: {
             type: DataTypes.STRING,
             allowNull: false,
+          },
+          fileUrl: {
+            type: DataTypes.STRING,
           }
         }, {
             sequelize
@@ -21,5 +24,9 @@ class Interface extends Model {
       this.belongsToMany(models.BBI, { foreignKey: "id_interface", through: 'BBiInterfaces'});
     }
 }
+
+Interface.prototype.generateUrl = function() {
+  this.fileUrl = `http://localhost:3332/uploads/interfaces/${this.filename}`;
+};
 
 module.exports = Interface;
