@@ -78,24 +78,26 @@ module.exports = {
 
     const bbi = await BBI.create({ name, description });
 
-    await bbi.setBBIDependents(bbiDeps.split(',').map((item) => Number(item.trim())));
-    await bbi.setBlockDependencies(deps.split(',').map((item) => Number(item.trim())));
-    await bbi.setImplements(bbs.split(',').map((item) => Number(item.trim())));
+    await bbi.setBBIDependents(bbiDeps ? bbiDeps.split(',').map((item) => Number(item.trim())) : []);
+    await bbi.setBlockDependencies(deps ? deps.split(',').map((item) => Number(item.trim())) : []);
+    await bbi.setImplements(bbs ? bbs.split(',').map((item) => Number(item.trim())) : []);
 
     let artifactIds = [];
-    for(let file of req.files.artifacts) {
-      const artifact = await Artifact.create({ filename: file.filename, extension: file.filename.split('.')[1] });
-      artifactIds.push(artifact.id);
+    if(req.files.artifactFiles){
+      for(let file of req.files.artifactFiles) {
+        const artifact = await Artifact.create({ filename: file.filename, extension: file.filename.split('.')[1] });
+        artifactIds.push(artifact.id);
+      }
     }
     await bbi.setArtifacts(artifactIds);
 
     let interfacesIds = [];
-    for(let file of req.files.interfaces) {
-      const interface = await Interface.create({ filename: file.filename, extension: file.filename.split('.')[1] });
-      interfacesIds.push(interface.id);
+    if(req.files.interfaceFiles){
+      for(let file of req.files.interfaceFiles) {
+        const interface = await Interface.create({ filename: file.filename, extension: file.filename.split('.')[1] });
+        interfacesIds.push(interface.id);
+      }
     }
-
-    console.log(interfacesIds)
     await bbi.setInterfaces(interfacesIds);
 
     const newBBI = await BBI.findOne({
@@ -146,7 +148,6 @@ module.exports = {
       ],
     });
 
-
     newBBI.Artifacts.map(function(artifact) {
       artifact.generateUrl();
     })
@@ -169,12 +170,34 @@ module.exports = {
       return res.status(400).json({error: 'BBI not found'});
     }
 
+    let artifactIds = [];
+    if(req.files.artifactFiles){
+      for(let file of req.files.artifactFiles) {
+        const artifact = await Artifact.create({ filename: file.filename, extension: file.filename.split('.')[1] });
+        artifactIds.push(artifact.id);
+      }
+    }
+
+    if(artifacts)
+      artifactIds = artifacts.split(',').map((item) => Number(item.trim())).concat(artifactIds);
+    
+    let interfacesIds = [];
+    if(req.files.interfaceFiles) {
+      for(let file of req.files.interfaceFiles) {
+        const interface = await Interface.create({ filename: file.filename, extension: file.filename.split('.')[1] });
+        interfacesIds.push(interface.id);
+      }
+    }
+    
+    if(interfaces)
+      interfacesIds = interfaces.split(',').map((item) => Number(item.trim())).concat(interfacesIds);
+
     await bbi.update({ name, description });
-    await bbi.setBBIDependents(bbiDeps);
-    await bbi.setBlockDependencies(deps);
-    await bbi.setImplements(bbs);
-    await bbi.setInterfaces(interfaces);
-    await bbi.setArtifacts(artifacts);
+    await bbi.setBBIDependents(bbiDeps ? bbiDeps.split(',').map((item) => Number(item.trim())) : []);
+    await bbi.setBlockDependencies(deps ? deps.split(',').map((item) => Number(item.trim())): []);
+    await bbi.setImplements(bbs ? bbs.split(',').map((item) => Number(item.trim())): []);
+    await bbi.setInterfaces(interfacesIds);
+    await bbi.setArtifacts(artifactIds);
 
     const newBBI = await BBI.findOne({
       where: {id: bbi.id},

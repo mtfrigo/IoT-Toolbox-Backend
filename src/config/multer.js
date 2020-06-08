@@ -5,9 +5,9 @@ const crypto = require("crypto");
 const multerConfig =  {
   storage: multer.diskStorage({
     destination(request, file, callback) {
-      if(file.fieldname === "artifacts") {
+      if(file.fieldname === "artifactFiles") {
         callback(null, path.resolve(__dirname, '..', '..', 'uploads', 'artifacts'));
-      } else if(file.fieldname === "interfaces") {
+      } else if(file.fieldname === "interfaceFiles") {
         callback(null, path.resolve(__dirname, '..', '..', 'uploads', 'interfaces'));
       } else {
         callback(null, path.resolve(__dirname, '..', '..', 'uploads'));

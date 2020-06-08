@@ -58,9 +58,8 @@ authRoutes.delete('/building-blocks/:id', BuildingBlockController.delete);
 authRoutes.get('/bbis', BBIController.index);
 authRoutes.get('/bbis-dependencies', BBIController.dependencies);
 // authRoutes.post('/bbis', upload.array('artifacts') , BBIController.create);
-authRoutes.post('/bbis', upload.fields([{ name: 'artifacts' }, { name: 'interfaces' }]) , BBIController.create);
-
-authRoutes.put('/bbis/:id', BBIController.update);
+authRoutes.post('/bbis', upload.fields([{ name: 'artifactFiles' }, { name: 'interfaceFiles' }]) , BBIController.create);
+authRoutes.put('/bbis/:id', upload.fields([{ name: 'artifactFiles' }, { name: 'interfaceFiles' }]), BBIController.update);
 authRoutes.post('/bbi/dependents/:id', BBIController.addDependents);
 authRoutes.post('/bbi/dependencies/:id', BBIController.addDependencies);
 authRoutes.post('/bbi/implements/:id', BBIController.addImplemented);
