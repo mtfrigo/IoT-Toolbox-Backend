@@ -163,7 +163,6 @@ module.exports = {
     const { id } = req.params;
     const { name, description, bbiDeps, deps, bbs, artifacts, interfaces } = req.body;
 
-    console.log(name, description, bbiDeps, deps, bbs, artifacts, interfaces)
     const bbi = await BBI.findByPk(id);
 
     if(!bbi) {
