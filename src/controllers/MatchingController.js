@@ -7,12 +7,16 @@ const  { Op } = require("sequelize");
 module.exports = {
 
     async get(req, res) {
-      const { requirements } = req.body;
+      const { requirements } = req.query;
+
+      let parsedRequirements = [];
+      if(requirements)
+       parsedRequirements = requirements.map(item => Number(item.trim()))
 
       const reqs = await Requirement.findAll({
         where: {
           id: {
-            [Op.in]: requirements
+            [Op.in]: parsedRequirements
           }
         },
         include: [

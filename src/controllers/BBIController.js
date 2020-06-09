@@ -67,6 +67,69 @@ module.exports = {
     return res.json(bbis)
   },
 
+  async show(req, res) {
+    const { id } = req.params;
+
+    console.log(id)
+
+    const bbi = await BBI.findOne({
+      where: {id},
+      include: [
+        { 
+          association: 'Artifacts',
+          attributes: ['id','filename', 'extension'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'Interfaces',
+          attributes: ['id','filename', 'extension'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'Implements',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'BBIDependents',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'BBIDependencies',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        },
+        { 
+          association: 'BlockDependencies',
+          attributes: ['id','name'],
+          through: {
+            attributes: []
+          }
+        }
+      ],
+    });
+
+    bbi.Artifacts.map(function(artifact) {
+      artifact.generateUrl();
+    })
+
+    bbi.Interfaces.map(function(interfaceFile) {
+      interfaceFile.generateUrl();
+    })
+    return res.json(bbi)
+  },
+
   async dependencies(req, res) {
     const deps = await Dependency.findAll();
 

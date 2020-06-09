@@ -56,6 +56,7 @@ authRoutes.delete('/building-blocks/:id', BuildingBlockController.delete);
 
 //BBI
 authRoutes.get('/bbis', BBIController.index);
+authRoutes.get('/bbis/:id', BBIController.show);
 authRoutes.get('/bbis-dependencies', BBIController.dependencies);
 // authRoutes.post('/bbis', upload.array('artifacts') , BBIController.create);
 authRoutes.post('/bbis', upload.fields([{ name: 'artifactFiles' }, { name: 'interfaceFiles' }]) , BBIController.create);
@@ -66,8 +67,7 @@ authRoutes.post('/bbi/implements/:id', BBIController.addImplemented);
 authRoutes.delete('/bbis/:id', BBIController.delete);
 
 //Matching
-authRoutes.post('/matching', MatchingController.get);
-
+authRoutes.get('/matching', MatchingController.get);
 
 module.exports = {
   authRoutes,
