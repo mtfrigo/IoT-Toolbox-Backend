@@ -25,6 +25,7 @@ const BuildingBlockController = require('./controllers/BuildingBlockController')
 const MatchingController = require('./controllers/MatchingController');
 const CapabilityController = require('./controllers/CapabilityController');
 const BBIController = require('./controllers/BBIController');
+const PanelController = require('./controllers/PanelController');
 
 const upload = multer(multerConfig);
 
@@ -68,6 +69,9 @@ authRoutes.delete('/bbis/:id', BBIController.delete);
 
 //Matching
 authRoutes.get('/matching', MatchingController.get);
+
+//Panel
+authRoutes.get('/panel', PanelController.index);
 
 module.exports = {
   authRoutes,

@@ -70,8 +70,6 @@ module.exports = {
   async show(req, res) {
     const { id } = req.params;
 
-    console.log(id)
-
     const bbi = await BBI.findOne({
       where: {id},
       include: [
