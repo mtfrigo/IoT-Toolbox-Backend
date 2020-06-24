@@ -41,6 +41,7 @@ class User extends Model {
     }
 
     static associate(models) {
+      this.hasMany(models.Project,  { foreignKey: "id_user"})
         //this.belongsToMany(models.Mount, { foreignKey: "cap_id", through: 'mount_caps', as: 'mounts' });
     }
 }

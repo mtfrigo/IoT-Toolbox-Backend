@@ -31,6 +31,7 @@ class BuildingBlock extends Model {
       this.belongsToMany(models.BuildingBlock, { foreignKey: "id_bb", through: 'BBlocksDependencies', as: 'BlockDependencies'});
       this.belongsToMany(models.BuildingBlock, { foreignKey: "id_dependent", through: 'BBlocksDependencies', as: 'DependentBlocks'});
       this.belongsToMany(models.BBI, { foreignKey: "id_bb", through: 'BBImplementations', as: 'ImplementedBy'});
+      this.belongsToMany(models.Project, { foreignKey: "id_bb", through: 'ProjectBBs', as: "Projects"});
     }
 }
 

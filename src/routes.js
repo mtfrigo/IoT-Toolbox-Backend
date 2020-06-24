@@ -26,6 +26,7 @@ const MatchingController = require('./controllers/MatchingController');
 const CapabilityController = require('./controllers/CapabilityController');
 const BBIController = require('./controllers/BBIController');
 const PanelController = require('./controllers/PanelController');
+const ProjectController = require('./controllers/ProjectController');
 
 const upload = multer(multerConfig);
 
@@ -72,6 +73,12 @@ authRoutes.get('/matching', MatchingController.get);
 
 //Panel
 authRoutes.get('/panel', PanelController.index);
+
+//Project
+authRoutes.get('/projects', ProjectController.index);
+authRoutes.post('/projects', ProjectController.create);
+authRoutes.get('/projects/:id', ProjectController.show);
+authRoutes.post('/projects/blocks', ProjectController.addBlocks);
 
 module.exports = {
   authRoutes,

@@ -25,7 +25,7 @@ class BBI extends Model {
       this.belongsToMany(models.BBI, { foreignKey: "id_bbi_dependent", through: 'BBisDependents', as: 'BBIDependencies'});
       this.belongsToMany(models.BuildingBlock, { foreignKey: "id_bbi", through: 'BBImplementations', as: 'Implements'});
       this.belongsToMany(models.Dependency, { foreignKey: "id_bbi", through: 'BBiDependencies', as: 'BlockDependencies'});
-
+      this.belongsToMany(models.ProjectBBI, { foreignKey: "id_bbi", through: 'ProjectBBs', as: "BBIs"});
     }
 } 
 

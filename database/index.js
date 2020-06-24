@@ -11,6 +11,9 @@ const BBi = require('../src/models/BBI');
 const Artifact = require('../src/models/Artifact');
 const Interface = require('../src/models/Interface');
 const Dependency = require('../src/models/Dependency');
+const Project = require('../src/models/Project');
+const ProjectBB = require('../src/models/ProjectBB');
+const ProjectBBI = require('../src/models/ProjectBBI');
 
 const connection = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
   host: dbConfig.host,
@@ -27,6 +30,9 @@ Interface.init(connection);
 Artifact.init(connection);
 Dependency.init(connection);
 BBi.init(connection);
+Project.init(connection);
+ProjectBB.init(connection);
+ProjectBBI.init(connection);
 
 //Init asssociations of models
 User.associate(connection.models);
@@ -37,5 +43,8 @@ Interface.associate(connection.models);
 Artifact.associate(connection.models);
 Dependency.associate(connection.models);
 BBi.associate(connection.models);
+Project.associate(connection.models);
+ProjectBB.associate(connection.models);
+ProjectBBI.associate(connection.models);
 
 module.exports = connection;
