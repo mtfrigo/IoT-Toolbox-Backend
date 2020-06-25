@@ -78,7 +78,8 @@ authRoutes.get('/panel', PanelController.index);
 authRoutes.get('/projects', ProjectController.index);
 authRoutes.post('/projects', ProjectController.create);
 authRoutes.get('/projects/:id', ProjectController.show);
-authRoutes.post('/projects/blocks', ProjectController.addBlocks);
+authRoutes.post('/projects/blocks', ProjectController.setBlocks);
+authRoutes.post('/projects/requirements', ProjectController.setRequirements);
 
 module.exports = {
   authRoutes,

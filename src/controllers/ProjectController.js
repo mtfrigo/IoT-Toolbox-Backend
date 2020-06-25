@@ -6,7 +6,9 @@ const { show } = require("./BBIController");
 module.exports = {
 
   async index(req, res) {
-    const projects = await Project.findAll();
+    const projects = await Project.findAll({
+      where: {id_user: req.id_user}
+    });
     return res.json(projects)
   },
 
@@ -26,6 +28,12 @@ module.exports = {
               ]
             }
           ]
+        },
+        {
+          association: 'Requirements',
+          through: {
+            attributes: []
+          }
         }
       ]
     });
@@ -42,7 +50,7 @@ module.exports = {
     return res.json(project)
   },
 
-  async addBlocks(req, res) {
+  async setBlocks(req, res) {
     const { blocks, id_project } = req.body;
 
     let project = await Project.findByPk(id_project);
@@ -81,6 +89,41 @@ module.exports = {
     });
 
     
+
+    return res.json(project)
+  },
+
+  async setRequirements(req, res) {
+    const { requirements, id_project } = req.body;
+
+    let project = await Project.findByPk(id_project);
+
+    await project.setRequirements(requirements.map(req => req.id))
+
+    project = await Project.findOne({
+      where: {id},
+      include: [
+        {
+          model: ProjectBB, as: 'bbs',
+          include: [
+            { association: 'bb'},
+            {
+              model: ProjectBBI, as: 'bbis',
+              include: [
+                { association: 'bbi' }
+              ]
+            }
+          ]
+        },
+        {
+          association: 'Requirements',
+          through: {
+            attributes: []
+          }
+        }
+      ]
+    });
+
 
     return res.json(project)
   },
