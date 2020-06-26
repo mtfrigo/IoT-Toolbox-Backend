@@ -38,6 +38,10 @@ module.exports = {
       ]
     });
 
+    if(!project) {
+      return res.status(400).json({error: 'No project with this id.'});
+    }
+
     return res.json(project)
   },
 
@@ -98,10 +102,14 @@ module.exports = {
 
     let project = await Project.findByPk(id_project);
 
+    if(!project) {
+      return res.status(400).json({error: 'No project with this id.'});
+    }
+
     await project.setRequirements(requirements.map(req => req.id))
 
     project = await Project.findOne({
-      where: {id},
+      where: {id: id_project},
       include: [
         {
           model: ProjectBB, as: 'bbs',
@@ -123,7 +131,6 @@ module.exports = {
         }
       ]
     });
-
 
     return res.json(project)
   },

@@ -8,6 +8,10 @@ class Project extends Model {
             type: DataTypes.STRING,
             allowNull: false,
           },
+          step: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+          },
         }, {
             sequelize
         })
