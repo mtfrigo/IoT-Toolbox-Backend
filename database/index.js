@@ -14,6 +14,7 @@ const Dependency = require('../src/models/Dependency');
 const Project = require('../src/models/Project');
 const ProjectBB = require('../src/models/ProjectBB');
 const ProjectBBI = require('../src/models/ProjectBBI');
+const Process = require('../src/models/Process');
 
 const connection = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.password, {
   host: dbConfig.host,
@@ -33,6 +34,7 @@ BBi.init(connection);
 Project.init(connection);
 ProjectBB.init(connection);
 ProjectBBI.init(connection);
+Process.init(connection);
 
 //Init asssociations of models
 User.associate(connection.models);
@@ -46,5 +48,6 @@ BBi.associate(connection.models);
 Project.associate(connection.models);
 ProjectBB.associate(connection.models);
 ProjectBBI.associate(connection.models);
+Process.associate(connection.models);
 
 module.exports = connection;

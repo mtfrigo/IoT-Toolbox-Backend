@@ -2,35 +2,36 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Projects', {
+    return queryInterface.createTable('Processes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      key: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      id_user: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {model: 'Users', key: 'id'},
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE',
-      },
-      id_process: {
-        type: Sequelize.INTEGER,
+      description: {
+        type: Sequelize.STRING,
         allowNull: true,
-        references: {model: 'Processes', key: 'id'},
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
       },
-      step: {
+      name: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+      version: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 0,
+      },
+      id_deployment: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      resource: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -41,11 +42,11 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: new Date(),
-      }
+      },
     });
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Projects');
+    return queryInterface.dropTable('Processes');
   }
 };

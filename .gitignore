@@ -2,6 +2,7 @@ node_modules
 
 !uploads/.gitkeep
 !uploads/artifacts/.gitkeep
+!uploads/processes/.gitkeep
 !uploads/interfaces/.gitkeep
 uploads/*/*
 !uploads/*/*.gitkeep

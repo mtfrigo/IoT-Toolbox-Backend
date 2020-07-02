@@ -1,6 +1,6 @@
 const  { Model, DataTypes } = require("sequelize");
 
-class Project extends Model {
+class Process extends Model {
     static init(sequelize) {
         super.init({
           // attributes
@@ -8,13 +8,25 @@ class Project extends Model {
             type: DataTypes.STRING,
             allowNull: false,
           },
-          step: {
+          key: {
+            type: DataTypes.STRING,
+            allowNull: false,
+          },
+          description: {
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
+          version: {
             type: DataTypes.INTEGER,
             allowNull: false,
           },
-          id_process: {
+          id_deployment: {
             type: DataTypes.INTEGER,
             allowNull: true,
+          },
+          resource: {
+            type: DataTypes.STRING,
+            allowNull: false,
           },
         }, {
             sequelize
@@ -22,11 +34,8 @@ class Project extends Model {
     }
 
     static associate(models) {
-      this.belongsTo(models.User, { foreignKey: "id_user"});
-      this.belongsToMany(models.Requirement, { foreignKey: "id_project", through: 'ProjectRequirements', as: "Requirements"});
-      this.hasMany(models.ProjectBB, { foreignKey: 'id_project', as: 'bbs'});
-      this.belongsTo(models.Process, { foreignKey: 'id_process', as: 'Process'} );
+      this.hasOne(models.Project, { foreignKey: "id_process"});
     }
 }
 
-module.exports = Project;
+module.exports = Process;

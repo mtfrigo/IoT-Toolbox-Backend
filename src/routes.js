@@ -27,6 +27,8 @@ const CapabilityController = require('./controllers/CapabilityController');
 const BBIController = require('./controllers/BBIController');
 const PanelController = require('./controllers/PanelController');
 const ProjectController = require('./controllers/ProjectController');
+const CamundaController = require('./controllers/CamundaController');
+const ProcessController = require('./controllers/ProcessController');
 
 const upload = multer(multerConfig);
 
@@ -77,9 +79,19 @@ authRoutes.get('/panel', PanelController.index);
 //Project
 authRoutes.get('/projects', ProjectController.index);
 authRoutes.post('/projects', ProjectController.create);
+authRoutes.put('/projects/:id', ProjectController.update);
+authRoutes.get('/projects/admin', ProjectController.indexAll);
 authRoutes.get('/projects/:id', ProjectController.show);
 authRoutes.post('/projects/blocks', ProjectController.setBlocks);
 authRoutes.post('/projects/requirements', ProjectController.setRequirements);
+
+//Process
+authRoutes.get('/process', ProcessController.index);
+authRoutes.post('/process', upload.fields([{ name: 'process' }]) , ProcessController.create);
+authRoutes.delete('/process/:id', ProcessController.delete);
+
+// Camunda
+authRoutes.get('/camunda', CamundaController.index);
 
 module.exports = {
   authRoutes,

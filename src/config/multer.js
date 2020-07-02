@@ -9,6 +9,8 @@ const multerConfig =  {
         callback(null, path.resolve(__dirname, '..', '..', 'uploads', 'artifacts'));
       } else if(file.fieldname === "interfaceFiles") {
         callback(null, path.resolve(__dirname, '..', '..', 'uploads', 'interfaces'));
+      } else if(file.fieldname === "process") {
+        callback(null, path.resolve(__dirname, '..', '..', 'uploads', 'processes'));
       } else {
         callback(null, path.resolve(__dirname, '..', '..', 'uploads'));
       }
