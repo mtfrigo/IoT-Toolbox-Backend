@@ -20,8 +20,20 @@ class Process extends Model {
             type: DataTypes.INTEGER,
             allowNull: false,
           },
+          id_definition: {
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
           id_deployment: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
+          id_instance: {
+            type: DataTypes.STRING,
+            allowNull: true,
+          },
+          business_key: {
+            type: DataTypes.STRING,
             allowNull: true,
           },
           resource: {

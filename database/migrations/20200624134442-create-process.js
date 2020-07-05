@@ -25,9 +25,21 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      id_definition: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      id_instance: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       id_deployment: {
         type: Sequelize.STRING,
         allowNull: false,
+      },
+      business_key: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       resource: {
         type: Sequelize.STRING,

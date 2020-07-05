@@ -87,6 +87,15 @@ authRoutes.post('/projects/requirements', ProjectController.setRequirements);
 
 //Process
 authRoutes.get('/process', ProcessController.index);
+authRoutes.get('/process/:id', ProcessController.show);
+authRoutes.put('/process/:id', ProcessController.update);
+authRoutes.get('/process/diagram/:id', ProcessController.diagram);
+authRoutes.post('/process/:id/start', ProcessController.start);
+authRoutes.post('/process/task/:id_task/complete', ProcessController.completeTask);
+authRoutes.get('/process/xml/:id', ProcessController.xml);
+authRoutes.get('/process/:id_instance/tasks', ProcessController.getTasks);
+authRoutes.get('/process/:id_task/rendered-form', ProcessController.getRenderedForm);
+authRoutes.get('/process/:id_task/form-variables', ProcessController.getFormVariables);
 authRoutes.post('/process', upload.fields([{ name: 'process' }]) , ProcessController.create);
 authRoutes.delete('/process/:id', ProcessController.delete);
 

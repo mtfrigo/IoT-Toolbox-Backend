@@ -7,7 +7,6 @@ module.exports = {
 
   async index(req, res) {
 
-    console.log(`salve`)
     const projects = await Project.findAll({
       where: {id_user: req.id_user}
     });
@@ -62,7 +61,10 @@ module.exports = {
           through: {
             attributes: []
           }
-        }
+        },
+        { 
+          association: 'Process',
+        },
       ]
     });
 
