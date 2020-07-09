@@ -44,7 +44,17 @@ npm run db:start
 ```
 
 
-### 1.2 Dependencies
+
+
+
+
+### 1.2 BPMS
+* Using Camunda available container
+```
+docker run --network iot-toolbox -d -p 8080:8080 camunda/camunda-bpm-platform:latest
+```
+
+### 1.3 Dependencies
 ```
 npm install
 ```
