@@ -17,36 +17,52 @@ How to install and use the Toolbox is explained in the following.
 ## Installation (for developers)
 
 The following software components are used in order to set up the toolbox: 
-* Back-End: [NodeJS](https://nodejs.org/en/), [Docker](https://docs.docker.com/get-docker/) and NPM.
+* Back-End: [NodeJS 12.18.0](https://nodejs.org/en/), [Docker](https://docs.docker.com/get-docker/) and NPM 6.14.4.
 * Front-End: ReactJS.
 
-### 1.1 Installation (on Linux)
+### 1.1 Database
 
-### First run:
+* Using available container
 
-Create directory for the database volume
-`sudo mkdir -p $HOME/docker/volumes/postgres`
+```
+docker create network iot-toolbox
+docker run --network iot-toolbox -d -p 5432:5432 --name toolbox-postgres  mfrigo/iot-toolbox-postgres:version1.0
+```
 
-Create docker container
-`sudo docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres:11.5`
+* Building and running container
 
-Create database: `sudo docker exec -it <DOCKER_CONTAINER_ID> psql -U postgres -d postgres -c "CREATE DATABASE iot_db;"`
+```
+docker create network iot-toolbox
+docker build --target postgres -t postgres:11.5  .
+docker run --network iot-toolbox -d -p 5432:5432 --name toolbox-postgres  postgres:11.5
+```
 
-Run the migrations: `npx sequelize db:migrate`
 
-Run the seeds: `npx sequelize db:seed:all`
+* Creating and seeding Database
+```
+npm run db:start
+```
 
-Go to the root folder after cloning this repository and use the command: `npm install`.
+
+### 1.2 Dependencies
+```
+npm install
+```
+
 
 ### Running the application:
+```
+npm run start
+```
 
-After all libraries been installed and the docker container created you can start the node server by using the command: `npm start`. The default server port is 3032. 
+The default server port is 3333. 
 
-To setup the front-end go to installation section on the [IoT Toolbox Front-End](https://github.com/mtfrigo/IoT-Toolbox-Frontend) project.
+
+To setup the front-end go to [IoT Toolbox Front-End](https://github.com/mtfrigo/IoT-Toolbox-Frontend) project.
 
 ## REST API
 
-A REST API is implemented using nodejs. 
+A REST API is implemented using NodeJS. 
 
 For the API complete reference click [here](https://github.com/mtfrigo/IoT-Toolbox-Backend/wiki/API-Reference)
 

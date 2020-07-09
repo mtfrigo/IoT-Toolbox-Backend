@@ -17,4 +17,4 @@ app.use('/uploads/interfaces', express.static(path.resolve(__dirname, '..', 'upl
 app.use('/uploads/artifacts', express.static(path.resolve(__dirname, '..', 'uploads', 'artifacts')));
 app.use('/uploads/processes', express.static(path.resolve(__dirname, '..', 'uploads', 'processes')));
 
-app.listen(3332);
+app.listen(3333);
