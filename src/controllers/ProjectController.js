@@ -26,7 +26,7 @@ module.exports = {
 
   async update(req, res) {
     const { id } = req.params;
-    const { step, name } = req.body;
+    const { step,  step_process, name } = req.body;
 
     const project = await Project.findByPk(id);
 
@@ -34,7 +34,7 @@ module.exports = {
         return res.status(400).json({error: 'Project not found!'});
     }
 
-    await project.update({ step, name });
+    await project.update({ step, step_process, name });
 
     return res.json(project);
   },
@@ -76,10 +76,10 @@ module.exports = {
   },
 
   async create(req, res) {
-    const { name, step } = req.body;
+    const { name } = req.body;
     const { id_user} = req;
 
-    const project = await Project.create({ name, step, id_user });
+    const project = await Project.create({ name, id_user });
 
     return res.json(project)
   },

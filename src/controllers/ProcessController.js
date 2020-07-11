@@ -83,7 +83,7 @@ module.exports = {
         const { name, key, description, version, resource, deploymentId, id } = process_definition[0];
         const process = await Process.create({ name, description, version, resource, id_deployment: deploymentId, id_definition: id, key });
         
-        await project.update({id_process: process.id})
+        await project.update({id_process: process.id, step_process: process.id})
       }
     }
 

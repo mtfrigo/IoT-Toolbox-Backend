@@ -10,7 +10,11 @@ class Project extends Model {
           },
           step: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
+          },
+          step_process: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
           },
           id_process: {
             type: DataTypes.INTEGER,

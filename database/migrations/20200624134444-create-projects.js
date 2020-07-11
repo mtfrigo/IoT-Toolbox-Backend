@@ -32,6 +32,11 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
+      step_process: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
